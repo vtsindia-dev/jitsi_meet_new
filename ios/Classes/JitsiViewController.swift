@@ -4,7 +4,8 @@ import JitsiMeetSDK
 class JitsiViewController: UIViewController {
     
     @IBOutlet weak var videoButton: UIButton?
-    
+
+    //CHEAT
     fileprivate var pipViewCoordinator: PiPViewCoordinator?
     fileprivate var jitsiMeetView: JitsiMeetView?
     
@@ -92,7 +93,7 @@ class JitsiViewController: UIViewController {
         pipViewCoordinator?.configureAsStickyView(withParentView: view.window)
         
         // animate in
-        jitsiMeetView.alpha = 0
+        // jitsiMeetView.alpha = 0
         pipViewCoordinator?.show()
         // pipViewCoordinator?.enterPictureInPicture()
         enterPicture(inPicture: [:])
@@ -136,6 +137,7 @@ extension JitsiViewController: JitsiMeetViewDelegate {
             self.pipViewCoordinator?.hide() { _ in
                 self.cleanUp()
                 self.dismiss(animated: true, completion: nil)
+                self.view.removeFromSuperview()
             }
         }
         
@@ -144,6 +146,7 @@ extension JitsiViewController: JitsiMeetViewDelegate {
     func enterPicture(inPicture data: [AnyHashable : Any]!) {
         //        print("CONFERENCE PIP IN")
         self.view.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        
         var mutatedData = data
         mutatedData?.updateValue("onPictureInPictureWillEnter", forKey: "event")
         self.eventSink?(mutatedData)
