@@ -17,6 +17,7 @@ class JitsiViewController: UIViewController {
     var videoMuted: Bool? = false
     var token:String? = nil
     var featureFlags: Dictionary<String, Any>? = Dictionary();
+    var zoomButton: UIButton?
     
     
     var jistiMeetUserInfo = JitsiMeetUserInfo()
@@ -84,13 +85,17 @@ class JitsiViewController: UIViewController {
         // Enable jitsimeet view to be a view that can be displayed
         // on top of all the things, and let the coordinator to manage
         // the view state and interactions
+        // pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
+        // pipViewCoordinator?.configureAsStickyView(withParentView: view)
+
         pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
-        pipViewCoordinator?.configureAsStickyView(withParentView: view)
+        pipViewCoordinator?.configureAsStickyView(withParentView: view.window)
         
         // animate in
         jitsiMeetView.alpha = 0
         pipViewCoordinator?.show()
-        pipViewCoordinator?.enterPictureInPicture()
+        // pipViewCoordinator?.enterPictureInPicture()
+        enterPicture(inPicture: [:])
     }
     
     func closeJitsiMeeting(){
