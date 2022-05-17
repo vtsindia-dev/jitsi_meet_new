@@ -41,7 +41,7 @@ class JitsiViewController: UIViewController {
     override func viewDidLoad() {
         
         //print("VIEW DID LOAD")
-        self.view.backgroundColor = .black
+        // self.view.backgroundColor = .black
         super.viewDidLoad()
     }
     
@@ -95,8 +95,8 @@ class JitsiViewController: UIViewController {
         // animate in
         // jitsiMeetView.alpha = 0
         pipViewCoordinator?.show()
-        // pipViewCoordinator?.enterPictureInPicture()
-        enterPicture(inPicture: [:])
+        pipViewCoordinator?.enterPictureInPicture()
+        // enterPicture(inPicture: [:])
     }
     
     func closeJitsiMeeting(){
@@ -146,7 +146,7 @@ extension JitsiViewController: JitsiMeetViewDelegate {
     func enterPicture(inPicture data: [AnyHashable : Any]!) {
         //        print("CONFERENCE PIP IN")
         self.view.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-        
+
         var mutatedData = data
         mutatedData?.updateValue("onPictureInPictureWillEnter", forKey: "event")
         self.eventSink?(mutatedData)
